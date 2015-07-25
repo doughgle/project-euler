@@ -43,7 +43,7 @@ public class SmallestMultipleTest {
     public void whenDivisorsAre1to20() {
         Range<Integer> divisors = Range.closed(1, 20);
         ContiguousSet<Integer> divs = ContiguousSet.create(divisors, DiscreteDomain.integers());
-        assertEquals(0, smallestEvenlyDivisibleMultiple(divs));
+        assertEquals(0, smallestEvenlyDivisibleMultiple(Lists.newArrayList(divs)));
     }
     
     public static void main(String[] args) {
@@ -54,14 +54,14 @@ public class SmallestMultipleTest {
         System.out.println(SmallestMultipleTest.smallestEvenlyDivisibleMultiple(divisors));
     }
     
-    public static int smallestEvenlyDivisibleMultiple(Iterable<Integer> divisors) {
+    public static int smallestEvenlyDivisibleMultiple(List<Integer> divisors) {
         int number = 1;
-        Iterator<Integer> iterator = divisors.iterator();
-        while (iterator.hasNext()) {
-            Integer divisor = (Integer) iterator.next();
-            if(number % divisor != 0) {
+        int size = divisors.size();
+        for (int i = 0; i < size; i++) {
+            Integer divisor = divisors.get(i);
+            if (number % divisor != 0) {
                 number++;
-                iterator = divisors.iterator();
+                i=0;
             }
         }
         return number;
