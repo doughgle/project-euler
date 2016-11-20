@@ -23,11 +23,11 @@ public class TenThouOnePrime {
     
     @Test
     public void nextPrime() throws Exception {
-        assertEquals(3, nextPrime(2));
-        assertEquals(5, nextPrime(3));
-        assertEquals(7, nextPrime(5));
-        assertEquals(11, nextPrime(7));
-        assertEquals(13, nextPrime(11));
+        assertEquals(3, NextPrime.compute(2));
+        assertEquals(5, NextPrime.compute(3));
+        assertEquals(7, NextPrime.compute(5));
+        assertEquals(11, NextPrime.compute(7));
+        assertEquals(13, NextPrime.compute(11));
     }
     
     /**
@@ -37,24 +37,13 @@ public class TenThouOnePrime {
     private static long prime(long nth) {
         long prime = 2;
         for (int n = 1; n < nth; n++) {
-            prime = nextPrime(prime);
+            prime = NextPrime.compute(prime);
         }
         return prime;
     }
 
     private static long nextPrime(final long start) {
-        int divisor = 2;
-        long number = start + 1;
-
-        while(divisor < number) {
-            if (number % divisor == 0) {
-                number++;
-                divisor = 2;
-            } else {
-                divisor++;
-            }
-        }
-        return number;
+        return NextPrime.compute(start);
     }
 
     public static void main(String[] args) {
